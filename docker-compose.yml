@@ -1,0 +1,29 @@
+version: '3'
+services:
+
+  sales-api:
+    build: './'
+    container_name: sales-api
+    environment:
+      - PORT=3001
+    ports:
+      - 3001:3001
+
+  sales-db:
+    image: mongo:latest
+    container_name: sales-db
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    ports:
+      - 27017:27017
+      - 28017:28017
+
+  sales_rabbit:
+    image: rabbitmq:3-management
+    container_name: sales_rabbit
+    ports:
+      - 5672:5672
+      - 25676:25676
+      - 15672:15672
